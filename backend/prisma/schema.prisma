@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id            String   @id @default(uuid())
+  name          String?
+  email         String   @unique
+  passwordHash  String
+  avatarUrl     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  mailAccounts  MailAccount[]
+  settings      UserSettings?
+}
+
+model MailAccount {
+  id            String   @id @default(uuid())
+  userId        String
+  provider      String
+  emailAddress  String
+  createdAt     DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emails        Email[]
+}
+
+model Email {
+  id            String   @id @default(uuid())
+  mailAccountId String
+  subject       String?
+  bodyText      String?
+  receivedAt    DateTime
+  isRead        Boolean  @default(false)
+
+  mailAccount   MailAccount @relation(fields: [mailAccountId], references: [id], onDelete: Cascade)
+  aiActions     AiAction[]
+}
+
+model AiAction {
+  id        String   @id @default(uuid())
+  emailId   String
+  type      String
+  response  String?
+  createdAt DateTime @default(now())
+
+  email     Email @relation(fields: [emailId], references: [id], onDelete: Cascade)
+}
+
+model UserSettings {
+  userId        String   @id
+  theme         String   @default("system")
+  language      String   @default("en")
+
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

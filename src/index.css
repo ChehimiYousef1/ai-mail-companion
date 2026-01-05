@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 210 33% 98%;
+    --foreground: 220 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 15%;
+
+    --primary: 213 100% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 25% 96%;
+    --secondary-foreground: 220 25% 25%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 220 10% 50%;
+
+    --accent: 51 100% 50%;
+    --accent-foreground: 35 90% 20%;
+
+    --success: 145 63% 49%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 213 100% 65%;
+
+    --radius: 1rem;
+
+    /* Custom tokens */
+    --ai-bubble: 213 80% 95%;
+    --user-bubble: 220 15% 96%;
+    --status-important: 0 85% 60%;
+    --status-action: 51 100% 50%;
+    --status-archived: 220 10% 70%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(213 100% 65%), hsl(230 90% 60%));
+    --gradient-success: linear-gradient(135deg, hsl(145 63% 49%), hsl(160 60% 45%));
+    --gradient-header: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 33% 98%) 100%);
+
+    /* Shadows */
+    --shadow-card: 0 4px 20px -4px hsl(220 25% 15% / 0.08);
+    --shadow-card-hover: 0 8px 30px -8px hsl(220 25% 15% / 0.15);
+    --shadow-fab: 0 8px 24px -4px hsl(213 100% 65% / 0.4);
+    --shadow-input: 0 2px 8px -2px hsl(220 25% 15% / 0.06);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 25% 25%;
+    --sidebar-primary: 213 100% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 25% 96%;
+    --sidebar-accent-foreground: 220 25% 25%;
+    --sidebar-border: 210 20% 92%;
+    --sidebar-ring: 213 100% 65%;
+  }
+
+  .dark {
+    --background: 220 25% 8%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 213 100% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 210 15% 60%;
+
+    --accent: 51 100% 50%;
+    --accent-foreground: 35 90% 20%;
+
+    --success: 145 63% 49%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 213 100% 65%;
+
+    --ai-bubble: 220 25% 18%;
+    --user-bubble: 220 20% 22%;
+    --status-important: 0 70% 55%;
+    --status-action: 51 90% 45%;
+    --status-archived: 220 10% 50%;
+
+    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    --shadow-card-hover: 0 8px 30px -8px hsl(0 0% 0% / 0.4);
+
+    --sidebar-background: 220 25% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 213 100% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 16%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 213 100% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .mail-card {
+    @apply bg-card rounded-2xl p-4 transition-all duration-300 ease-out cursor-pointer;
+    box-shadow: var(--shadow-card);
+  }
+
+  .mail-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .status-tag {
+    @apply text-xs font-medium px-2.5 py-1 rounded-full;
+  }
+
+  .status-important {
+    @apply bg-destructive/10 text-destructive;
+  }
+
+  .status-action {
+    @apply bg-accent/20 text-accent-foreground;
+  }
+
+  .status-archived {
+    @apply bg-muted text-muted-foreground;
+  }
+
+  .ai-bubble {
+    @apply rounded-2xl rounded-bl-md px-4 py-3;
+    background-color: hsl(var(--ai-bubble));
+  }
+
+  .user-bubble {
+    @apply rounded-2xl rounded-br-md px-4 py-3;
+    background-color: hsl(var(--user-bubble));
+  }
+
+  .action-button {
+    @apply px-4 py-2 rounded-xl font-medium text-sm transition-all duration-200;
+    @apply hover:scale-105 active:scale-95;
+  }
+
+  .fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center;
+    @apply transition-all duration-300 hover:scale-110 active:scale-95;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-fab);
+  }
+
+  .glass-header {
+    @apply backdrop-blur-xl bg-background/80 border-b border-border/50;
+  }
+
+  .typing-dot {
+    @apply w-2 h-2 rounded-full bg-primary animate-bounce;
+  }
+
+  .swipe-action {
+    @apply absolute inset-y-0 flex items-center justify-center px-6 rounded-2xl;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.4s ease-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 0.5s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes bounceSubtle {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes typing {
+    0%, 100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+}
